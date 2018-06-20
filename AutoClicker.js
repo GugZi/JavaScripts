@@ -1,103 +1,102 @@
 // ==UserScript==
 // @name         Cookies 2 Auto Clicker
-// @version      0.1
+// @version      0.2
 // @description  Auto click big / golden cookie
-//               http://orteil.dashnet.org/cookieclicker/
 // @include      *://*/cookieclicker/
 // @author       GugZi
-
 // ==/UserScript==
 
 (function() {
-//===============================================
-// stop previous hack if present
-if (typeof hack != 'undefined') {
-    hack.stop();
-}
-
-//===============================================
-// define our hack "class"
-
-var hack = {
     //===============================================
+    // stop previous hack if present
+    if (typeof hack != 'undefined') {
+        hack.stop();
+    }
 
     //===============================================
-    // start all "non-breaking" hacks
+    // define our hack "class"
 
-    start: function() {
-        this.startCookie();
-        this.startShimmer();
-        // this.startCheating();
-    },
-    //===============================================
+    var hack = {
+        //===============================================
 
-    //===============================================
-    // stop all hacks
+        //===============================================
+        // start all "non-breaking" hacks
 
-    stop: function() {
-        this.stopCookie();
-        this.stopShimmer();
-        this.stopCheating();
-    },
-    //===============================================
+        start: function() {
+            this.startCookie();
+            this.startShimmer();
+            // this.startCheating();
+        },
+        //===============================================
 
-    //===============================================
-    // golden cookies / reindeer click hack
+        //===============================================
+        // stop all hacks
 
-    startShimmer: function() {
-        this.stopShimmer();
-        this.shimmersInterval = setInterval(function() {
-            var shimmers = document.getElementsByClassName('shimmer');
-            for (var shimmer of shimmers) {
-                shimmer.click();
+        stop: function() {
+            this.stopCookie();
+            this.stopShimmer();
+            this.stopCheating();
+        },
+        //===============================================
+
+        //===============================================
+        // golden cookies / reindeer click hack
+
+        startShimmer: function() {
+            this.stopShimmer();
+            this.shimmersInterval = setInterval(function() {
+                var shimmers = document.getElementsByClassName('shimmer');
+                for (var shimmer of shimmers) {
+                    shimmer.click();
+                }
+            }, 1000);
+        },
+        stopShimmer: function() {
+            if (this.shimmersInterval) {
+                clearInterval(this.shimmersInterval);
             }
-        }, 1000);
-    },
-    stopShimmer: function() {
-        if (this.shimmersInterval) {
-            clearInterval(this.shimmersInterval);
-        }
-    },
-    //===============================================
+        },
+        //===============================================
 
-    //===============================================
-    // cookie click hack
-    //===============================================
-    startCookie: function() {
-        this.stopCookie();
-        this.cookieInterval = setInterval(function() {
-            document.getElementById('bigCookie').click()
-        }, 0.05);
-    },
-    stopCookie: function() {
-        if (this.cookieInterval) {
-            clearInterval(this.cookieInterval);
-        }
-    },
+        //===============================================
+        // cookie click hack
 
-    //===============================================
-    // WARNING : This one will break the fun of the game by spawning a lot of golden cookies and reindeers...
-    // Use at your own risk !
-
-    startCheating: function() {
-        this.stopCheating();
-        this.dontCareInterval = setInterval(function() {
-            if (typeof Game != 'undefined') {
-                new Game.shimmer('reindeer');
-                new Game.shimmer('golden');
+        startCookie: function() {
+            this.stopCookie();
+            this.cookieInterval = setInterval(function() {
+                document.getElementById('bigCookie').click()
+            }, 0.05);
+        },
+        stopCookie: function() {
+            if (this.cookieInterval) {
+                clearInterval(this.cookieInterval);
             }
-        }, 1000);
-    },
-    stopCheating: function() {
-        if (this.dontCareInterval) {
-            clearInterval(this.dontCareInterval);
-        }
-    },
-};
-//===============================================
+        },
+        //===============================================
 
-//===============================================
-// auto start all hacks
-hack.start();
-//===============================================
+        //===============================================
+        // WARNING : This one will break the fun of the game by spawning a lot of golden cookies and reindeers...
+        // Use at your own risk !
+
+        startCheating: function() {
+            this.stopCheating();
+            this.dontCareInterval = setInterval(function() {
+                if (typeof Game != 'undefined') {
+                    new Game.shimmer('reindeer');
+                    new Game.shimmer('golden');
+                }
+            }, 1000);
+        },
+        stopCheating: function() {
+            if (this.dontCareInterval) {
+                clearInterval(this.dontCareInterval);
+            }
+        },
+        //===============================================
+    };
+
+    //===============================================
+    // auto start all hacks
+    hack.start();
+    //===============================================
 })();
